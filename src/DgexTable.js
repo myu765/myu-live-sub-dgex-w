@@ -5,6 +5,8 @@ import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import InputIcon from '@mui/icons-material/Input';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components'
@@ -50,7 +52,19 @@ table {
     }
   }
 }
+/* ファイル読み込みボタンのレイアウト */
+label > input {
+  display:none;
+}
+label {
+  margin: 4px 0px 4px 0px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
 `
+// A + B のステータスゲージを作る(およそ60でMAX)
 function CreateProgress ( a, b ){
   return (
     <div class="progress">
@@ -62,6 +76,100 @@ function CreateProgress ( a, b ){
       </div>
     </div>
   );
+}
+function CreateProgressHTML ( a, b ){
+  if( parseInt(a) + parseInt(b) === 0 ) return "";
+  return `
+    <div class="progress">
+      <div class="progress-bar bg-danger" role="progressbar" aria-valuenow=` + a + `aria-valuemin="0" aria-valuemax="100" style="width: ` + parseInt(a)*1.6666667 + `%;">
+      ` + a + `
+      </div>
+      <div class="progress-bar bg-success" role="progressbar" aria-valuenow=`+ b +` aria-valuemin="0" aria-valuemax="100" style="width: ` + parseInt(b)*1.6666667 + `%;">
+      ` + b + `
+      </div>
+    </div>
+    `
+  ;
+}
+
+const RefreshTable = ( table, _data ) => {
+  for(let i in _data){
+    if( table.rows[0].cells[0].firstChild.data === "配置")
+    {
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[0].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[0].firstChild.data = _data[i].pos
+      : table.rows[ parseInt(i) + 1 ].cells[0].appendChild(document.createTextNode(_data[i].pos))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[1].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[1].firstChild.data = _data[i].race
+      : table.rows[ parseInt(i) + 1 ].cells[1].appendChild(document.createTextNode(_data[i].race))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[2].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[2].firstChild.data = _data[i].cls
+      : table.rows[ parseInt(i) + 1 ].cells[2].appendChild(document.createTextNode(_data[i].cls))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[3].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[3].firstChild.data = _data[i].name
+      : table.rows[ parseInt(i) + 1 ].cells[3].appendChild(document.createTextNode(_data[i].name))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[4].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[4].firstChild.data = _data[i].lv
+      : table.rows[ parseInt(i) + 1 ].cells[4].appendChild(document.createTextNode(_data[i].lv))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[5].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[5].firstChild.data = _data[i].hp
+      : table.rows[ parseInt(i) + 1 ].cells[5].appendChild(document.createTextNode(_data[i].hp))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[6].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[6].firstChild.data = _data[i].str_sum
+      : table.rows[ parseInt(i) + 1 ].cells[6].appendChild(document.createTextNode(_data[i].str_sum))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[7].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[7].innerHTML = CreateProgressHTML(_data[i].str_base, _data[i].str_plus + _data[i].str_r_a + _data[i].str_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[7].innerHTML = CreateProgressHTML(_data[i].str_base, _data[i].str_plus + _data[i].str_r_a + _data[i].str_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[8].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[8].firstChild.data = _data[i].int_sum
+      : table.rows[ parseInt(i) + 1 ].cells[8].appendChild(document.createTextNode(_data[i].int_sum))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[9].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[9].innerHTML = CreateProgressHTML(_data[i].int_base, _data[i].int_plus + _data[i].int_r_a + _data[i].int_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[9].innerHTML = CreateProgressHTML(_data[i].int_base, _data[i].int_plus + _data[i].int_r_a + _data[i].int_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[10].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[10].firstChild.data = _data[i].mys_sum
+      : table.rows[ parseInt(i) + 1 ].cells[10].appendChild(document.createTextNode(_data[i].mys_sum))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[11].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[11].innerHTML = CreateProgressHTML(_data[i].mys_base, _data[i].mys_plus + _data[i].mys_r_a + _data[i].mys_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[11].innerHTML = CreateProgressHTML(_data[i].mys_base, _data[i].mys_plus + _data[i].mys_r_a + _data[i].mys_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[12].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[12].firstChild.data = _data[i].vit_sum
+      : table.rows[ parseInt(i) + 1 ].cells[12].appendChild(document.createTextNode(_data[i].vit_sum))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[13].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[13].innerHTML = CreateProgressHTML(_data[i].vit_base, _data[i].vit_plus + _data[i].vit_r_a + _data[i].vit_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[13].innerHTML = CreateProgressHTML(_data[i].vit_base, _data[i].vit_plus + _data[i].vit_r_a + _data[i].vit_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[14].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[14].firstChild.data = _data[i].agi_sum
+      : table.rows[ parseInt(i) + 1 ].cells[14].appendChild(document.createTextNode(_data[i].agi_sum))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[15].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[15].innerHTML = CreateProgressHTML(_data[i].agi_base, _data[i].agi_plus + _data[i].agi_r_a + _data[i].agi_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[15].innerHTML = CreateProgressHTML(_data[i].agi_base, _data[i].agi_plus + _data[i].agi_r_a + _data[i].agi_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[16].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[16].firstChild.data = _data[i].luc_sum
+      : table.rows[ parseInt(i) + 1 ].cells[16].appendChild(document.createTextNode(_data[i].luc_sum))
+      console.log( document.body.contains(table.rows[ parseInt(i) + 1 ].cells[17].firstChild) )
+      console.log( CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a) )
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[17].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[17].innerHTML = CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a)
+      : table.rows[ parseInt(i) + 1 ].cells[17].innerHTML = CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a)
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[18].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[18].firstChild.data = _data[i].e_r_a
+      : table.rows[ parseInt(i) + 1 ].cells[18].appendChild(document.createTextNode(_data[i].e_r_a))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[19].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[19].firstChild.data = _data[i].atk_ra
+      : table.rows[ parseInt(i) + 1 ].cells[19].appendChild(document.createTextNode(_data[i].atk_ra))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[20].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[20].firstChild.data = _data[i].e_l_a
+      : table.rows[ parseInt(i) + 1 ].cells[20].appendChild(document.createTextNode(_data[i].e_l_a))
+      document.body.contains(table.rows[ parseInt(i) + 1 ].cells[21].firstChild)
+      ? table.rows[ parseInt(i) + 1 ].cells[21].firstChild.data = _data[i].atk_la
+      : table.rows[ parseInt(i) + 1 ].cells[21].appendChild(document.createTextNode(_data[i].atk_la))
+    }
+    else
+    {
+
+    }
+  }
 }
 
 const default_data = [
@@ -138,7 +246,9 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"", atk_la:0,
   },
 ]
-let data = default_data
+console.log(JSON.stringify(default_data))
+var data = default_data
+let fileload_data = default_data
 
 // ローカルストレージから取得
 let json_data = localStorage.getItem('json')
@@ -187,20 +297,24 @@ if(json_data){
 }
 
 // 算出項目に値をセット
-for(let i in data){
-  data[i].str_sum = parseInt(data[i].str_base) + parseInt(data[i].str_plus) + parseInt(data[i].str_r_a) + parseInt(data[i].str_l_a)
-  data[i].int_sum = parseInt(data[i].int_base) + parseInt(data[i].int_plus) + parseInt(data[i].int_r_a) + parseInt(data[i].int_l_a)
-  data[i].mys_sum = parseInt(data[i].mys_base) + parseInt(data[i].mys_plus) + parseInt(data[i].mys_r_a) + parseInt(data[i].mys_l_a)
-  data[i].vit_sum = parseInt(data[i].vit_base) + parseInt(data[i].vit_plus) + parseInt(data[i].vit_r_a) + parseInt(data[i].vit_l_a)
-  data[i].agi_sum = parseInt(data[i].agi_base) + parseInt(data[i].agi_plus) + parseInt(data[i].agi_r_a) + parseInt(data[i].agi_l_a)
-  data[i].luc_sum = parseInt(data[i].luc_base) + parseInt(data[i].luc_plus) + parseInt(data[i].luc_r_a) + parseInt(data[i].luc_l_a)
-  data[i].str_bar = CreateProgress( data[i].str_base, parseInt(data[i].str_plus) + parseInt(data[i].str_r_a) + parseInt(data[i].str_l_a) )
-  data[i].int_bar = CreateProgress( data[i].int_base, parseInt(data[i].int_plus) + parseInt(data[i].int_r_a) + parseInt(data[i].int_l_a) )
-  data[i].mys_bar = CreateProgress( data[i].mys_base, parseInt(data[i].mys_plus) + parseInt(data[i].mys_r_a) + parseInt(data[i].mys_l_a) )
-  data[i].vit_bar = CreateProgress( data[i].vit_base, parseInt(data[i].vit_plus) + parseInt(data[i].vit_r_a) + parseInt(data[i].vit_l_a) )
-  data[i].agi_bar = CreateProgress( data[i].agi_base, parseInt(data[i].agi_plus) + parseInt(data[i].agi_r_a) + parseInt(data[i].agi_l_a) )
-  data[i].luc_bar = CreateProgress( data[i].luc_base, parseInt(data[i].luc_plus) + parseInt(data[i].luc_r_a) + parseInt(data[i].luc_l_a) )
+const CalcStatus = () => {
+  for(let i in data){
+    data[i].str_sum = parseInt(data[i].str_base) + parseInt(data[i].str_plus) + parseInt(data[i].str_r_a) + parseInt(data[i].str_l_a)
+    data[i].int_sum = parseInt(data[i].int_base) + parseInt(data[i].int_plus) + parseInt(data[i].int_r_a) + parseInt(data[i].int_l_a)
+    data[i].mys_sum = parseInt(data[i].mys_base) + parseInt(data[i].mys_plus) + parseInt(data[i].mys_r_a) + parseInt(data[i].mys_l_a)
+    data[i].vit_sum = parseInt(data[i].vit_base) + parseInt(data[i].vit_plus) + parseInt(data[i].vit_r_a) + parseInt(data[i].vit_l_a)
+    data[i].agi_sum = parseInt(data[i].agi_base) + parseInt(data[i].agi_plus) + parseInt(data[i].agi_r_a) + parseInt(data[i].agi_l_a)
+    data[i].luc_sum = parseInt(data[i].luc_base) + parseInt(data[i].luc_plus) + parseInt(data[i].luc_r_a) + parseInt(data[i].luc_l_a)
+    data[i].str_bar = CreateProgress( data[i].str_base, parseInt(data[i].str_plus) + parseInt(data[i].str_r_a) + parseInt(data[i].str_l_a) )
+    data[i].int_bar = CreateProgress( data[i].int_base, parseInt(data[i].int_plus) + parseInt(data[i].int_r_a) + parseInt(data[i].int_l_a) )
+    data[i].mys_bar = CreateProgress( data[i].mys_base, parseInt(data[i].mys_plus) + parseInt(data[i].mys_r_a) + parseInt(data[i].mys_l_a) )
+    data[i].vit_bar = CreateProgress( data[i].vit_base, parseInt(data[i].vit_plus) + parseInt(data[i].vit_r_a) + parseInt(data[i].vit_l_a) )
+    data[i].agi_bar = CreateProgress( data[i].agi_base, parseInt(data[i].agi_plus) + parseInt(data[i].agi_r_a) + parseInt(data[i].agi_l_a) )
+    data[i].luc_bar = CreateProgress( data[i].luc_base, parseInt(data[i].luc_plus) + parseInt(data[i].luc_r_a) + parseInt(data[i].luc_l_a) )
+  }
 }
+CalcStatus()
+
 // ローカルストレージに保存
 const UpdateLocalStrage = (data) => {
   let json_data = []
@@ -335,7 +449,7 @@ const columns = [
 ];
 
 function DgexTable() {
-  const PackageToggle = (onColumnToggle,row) => {
+  const PackageToggle = (onColumnToggle) => {
     // ON -> OFF
     onColumnToggle("hp")
     // OFF -> ON
@@ -389,11 +503,7 @@ function DgexTable() {
     toggles
   }) => (
     <div>
-      <h6
-        style={{margin: 0, padding: "4px 0px", border: 0, width: "100%", fontSize: "14px", textAlign:"center"}}
-      >
-        MENU
-      </h6>
+      <p style={{margin: 0, padding: "4px 0px", border: 0, width: "100%", fontSize: "14px", textAlign:"center"}}>EDIT</p>
       {
         columns
           .map(column => ({
@@ -404,7 +514,7 @@ function DgexTable() {
             column.dataField === "str_base" &&
             <button
               type="button"
-              style={{marginTop: "4px", padding: 0, border: 0, width: "100%", height: "auto"}}
+              style={{marginTop: "0px", marginBottom: "4px", padding: 0, border: 0, width: "100%"}}
               key={ column.dataField }
               className=
               {
@@ -416,14 +526,60 @@ function DgexTable() {
             </button>
           ))
       }
+      <p style={{margin: 0, padding: "4px 0px", border: 0, width: "100%", fontSize: "14px", textAlign:"center"}}>LOAD</p>
+      <button style={{marginTop: "0px", marginBottom: "4px", padding: 0, border: 0, width: "100%"}}>
+        <label for="loadfile"><InputIcon />
+          <input type="file" id="loadfile" accept="text/*" onChange={ () => onFileInputChange( document.querySelector('#loadfile') ) } />
+        </label>
+      </button>
+      <p style={{margin: 0, padding: "4px 0px", border: 0, width: "100%", fontSize: "14px", textAlign:"center"}}>SAVE</p>
+      <button type="button" id="savefile"
+              style={{marginTop: "0px", marginBottom: "4px", padding: 0, border: 0, width: "100%"}}
+              onClick={ () => SaveButtonClick( document.querySelector('#savefile') )}
+      >
+        { <SaveAltIcon />}
+      </button>
     </div>
   );
-
+  // ファイルを読み込む
+  const onFileInputChange = (e) => {
+    let fileList = e.files
+    let reader = new FileReader()
+    reader.readAsText(fileList[0])
+    reader.onload = () => {
+      // テキストからデータに変換してdataとローカルストレージを置き換える
+      fileload_data = JSON.parse(reader.result)
+      data = { ...fileload_data }
+      CalcStatus()
+      console.log(JSON.stringify(data))
+      UpdateLocalStrage(data)
+      // テーブルを書き換える
+      const table = document.getElementById('mainBootstrapTable')
+      RefreshTable( table, data )
+    }
+  };
+  // ファイルを保存する
+  const SaveButtonClick = (e) => {
+    e.addEventListener('click', SaveButton(e) )
+    e.removeEventListener('click', SaveButton)
+  }
+  function SaveButton(e){
+    const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'})
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    document.body.appendChild(a)
+    a.download = 'dgex-save.dat'
+    a.href = url
+    a.click()
+    a.remove()
+    URL.revokeObjectURL(url)
+  }  
+  
   const defaultSorted = [{
-    dataField: 'sort',
+    dataField: 'order',
     order: 'asc'
   }];
-
+  
   return (
     <ToolkitProvider
       keyField="id"
@@ -461,6 +617,7 @@ function DgexTable() {
             overflow: 'hidden',
           }}>
             <BootstrapTable
+              id="mainBootstrapTable"
               bootstrap4
               keyField='id'
               data={ data }
