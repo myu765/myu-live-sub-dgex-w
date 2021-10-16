@@ -66,7 +66,7 @@ function CreateProgress ( a, b ){
 
 const default_data = [
   {
-    id: 1, order:1, pos:"前衛", race:"ヒューマン", cls:"デモンゲイザー", name: "オズ", lv:37, hp:937,
+    id: 1, order:1, pos:"前衛", race:"ヒューマン", cls:"ゲイザー", name: "オズ", lv:37, hp:937,
     str_base: 21, int_base: 9, mys_base: 9, vit_base: 20, agi_base: 9, luc_base:22,
     str_plus: 7, int_plus: 0, mys_plus: 0, vit_plus: 5, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -151,6 +151,7 @@ if(json_data){
     data[i].order = json_data[i]["order"]
     data[i].pos = json_data[i]["pos"]
     data[i].race = json_data[i]["race"]
+    data[i].cls = json_data[i]["cls"]
     data[i].name = json_data[i]["name"]
     data[i].lv = json_data[i]["lv"]
     data[i].hp = json_data[i]["hp"]
@@ -205,7 +206,7 @@ const UpdateLocalStrage = (data) => {
   let json_data = []
   for(let i in data){
     json_data.push({
-      id: data[i].id, order: data[i].order, pos: data[i].pos, race: data[i].race, name: data[i].name, lv: data[i].lv, hp: data[i].hp,
+      id: data[i].id, order: data[i].order, pos: data[i].pos, race: data[i].race, cls: data[i].cls, name: data[i].name, lv: data[i].lv, hp: data[i].hp,
       e_r_a: data[i].e_r_a, atk_ra: data[i].atk_ra, e_l_a: data[i].e_l_a, atk_la: data[i].atk_la,
       str_base: data[i].str_base, str_plus: data[i].str_plus, str_r_a: data[i].str_r_a, str_l_a: data[i].str_l_a,
       int_base: data[i].int_base, int_plus: data[i].int_plus, int_r_a: data[i].int_r_a, int_l_a: data[i].int_l_a,
@@ -223,6 +224,7 @@ const UpdateData = (row) => {
   data[parseInt(row.id)-1].order = row.order
   data[parseInt(row.id)-1].pos = row.pos
   data[parseInt(row.id)-1].race = row.race
+  data[parseInt(row.id)-1].cls = row.cls
   data[parseInt(row.id)-1].name = row.name
   data[parseInt(row.id)-1].lv = row.lv
   data[parseInt(row.id)-1].hp = row.hp
@@ -315,7 +317,7 @@ const columns = [
   { dataField: 'luc_base', text: 'ｷｬﾗ', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'right', hidden:true, },
   { dataField: 'luc_plus', text: '装備', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'right', hidden:true, },
   { dataField: 'e_r_a', text: '右手', headerAlign: 'center', headerStyle: {width: '15px'}, align: 'center', },
-  { dataField: 'atk_ra', text: '攻撃', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'right', },
+  { dataField: 'atk_ra', text: '攻撃', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'center', },
   { dataField: 'str_r_a', text: 'STR', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'int_r_a', text: 'INT', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'mys_r_a', text: 'MYS', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
@@ -323,7 +325,7 @@ const columns = [
   { dataField: 'agi_r_a', text: 'AGI', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'luc_r_a', text: 'LUC', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'e_l_a', text: '左手', headerAlign: 'center', headerStyle: {width: '15px'}, align: 'center', },
-  { dataField: 'atk_la', text: '攻撃', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'right', },
+  { dataField: 'atk_la', text: '攻撃', headerAlign: 'center', headerStyle: {width: '3px'}, align: 'center', },
   { dataField: 'str_l_a', text: 'STR', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'int_l_a', text: 'INT', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
   { dataField: 'mys_l_a', text: 'MYS', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', hidden:true, },
@@ -387,6 +389,11 @@ function DgexTable() {
     toggles
   }) => (
     <div>
+      <h6
+        style={{margin: 0, padding: "4px 0px", border: 0, width: "100%", fontSize: "14px", textAlign:"center"}}
+      >
+        MENU
+      </h6>
       {
         columns
           .map(column => ({
@@ -397,7 +404,7 @@ function DgexTable() {
             column.dataField === "str_base" &&
             <button
               type="button"
-              style={{padding: 0, border: 0, width: "100%", height: "13.4em"}}
+              style={{marginTop: "4px", padding: 0, border: 0, width: "100%", height: "auto"}}
               key={ column.dataField }
               className=
               {
@@ -464,7 +471,6 @@ function DgexTable() {
                 blurToSave: true,
                 afterSaveCell: (oldValue, newValue, row, column) => {
                   // 算出項目の再描画
-                  console.log(row.luc_r_a)
                   row.str_sum = parseInt(row.str_base) + parseInt(row.str_plus) + parseInt(row.str_r_a) + parseInt(row.str_l_a) ;
                   row.int_sum = parseInt(row.int_base) + parseInt(row.int_plus) + parseInt(row.int_r_a) + parseInt(row.int_l_a) ;
                   row.mys_sum = parseInt(row.mys_base) + parseInt(row.mys_plus) + parseInt(row.mys_r_a) + parseInt(row.mys_l_a) ;
