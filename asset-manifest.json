@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/myu-live-sub-dgex-w/static/css/main.3d29c7dd.chunk.css",
-    "main.js": "/myu-live-sub-dgex-w/static/js/main.c164c658.chunk.js",
-    "main.js.map": "/myu-live-sub-dgex-w/static/js/main.c164c658.chunk.js.map",
+    "main.css": "/myu-live-sub-dgex-w/static/css/main.afd7172b.chunk.css",
+    "main.js": "/myu-live-sub-dgex-w/static/js/main.2d4cfe82.chunk.js",
+    "main.js.map": "/myu-live-sub-dgex-w/static/js/main.2d4cfe82.chunk.js.map",
     "runtime-main.js": "/myu-live-sub-dgex-w/static/js/runtime-main.b3478229.js",
     "runtime-main.js.map": "/myu-live-sub-dgex-w/static/js/runtime-main.b3478229.js.map",
     "static/css/2.ab1de19e.chunk.css": "/myu-live-sub-dgex-w/static/css/2.ab1de19e.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.2e21029a.chunk.js.map": "/myu-live-sub-dgex-w/static/js/3.2e21029a.chunk.js.map",
     "index.html": "/myu-live-sub-dgex-w/index.html",
     "static/css/2.ab1de19e.chunk.css.map": "/myu-live-sub-dgex-w/static/css/2.ab1de19e.chunk.css.map",
-    "static/css/main.3d29c7dd.chunk.css.map": "/myu-live-sub-dgex-w/static/css/main.3d29c7dd.chunk.css.map",
+    "static/css/main.afd7172b.chunk.css.map": "/myu-live-sub-dgex-w/static/css/main.afd7172b.chunk.css.map",
     "static/js/2.1161fabe.chunk.js.LICENSE.txt": "/myu-live-sub-dgex-w/static/js/2.1161fabe.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b3478229.js",
     "static/css/2.ab1de19e.chunk.css",
     "static/js/2.1161fabe.chunk.js",
-    "static/css/main.3d29c7dd.chunk.css",
-    "static/js/main.c164c658.chunk.js"
+    "static/css/main.afd7172b.chunk.css",
+    "static/js/main.2d4cfe82.chunk.js"
   ]
 }
