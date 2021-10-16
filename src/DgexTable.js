@@ -151,7 +151,7 @@ if(json_data){
     data[i].order = json_data[i]["order"]
     data[i].pos = json_data[i]["pos"]
     data[i].race = json_data[i]["race"]
-    data[i].cls = json_data[i]["cls"]
+    json_data[i]["cls"] ? data[i].cls = json_data[i]["cls"] : data[i].cls = ""
     data[i].name = json_data[i]["name"]
     data[i].lv = json_data[i]["lv"]
     data[i].hp = json_data[i]["hp"]
