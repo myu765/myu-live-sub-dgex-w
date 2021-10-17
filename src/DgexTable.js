@@ -473,13 +473,12 @@ function DgexTable() {
     snackbar001: false,
     snackbarTrns: undefined,
   });
-  //const [transition, setTransition] = React.useState(undefined);
   const handleOpen = () => setVal({ ...val, modal001: true });
   const handleClose = () => setVal({ ...val, modal001: false });
   
   //  クリップボードに保存する
-  function copyTextToClipboard(text) {
-    navigator.clipboard.writeText(text)
+  function copyTextToClipboard(_json) {
+    navigator.clipboard.writeText(JSON.stringify(_json))
     .then( () => {
       console.error('Async: success')
     }, (err) => {
@@ -596,7 +595,8 @@ function DgexTable() {
               size="small"
               startIcon={<AssignmentTurnedInSharpIcon color="primary" />}
               onClick={ () => { 
-                copyTextToClipboard(JSON.stringify(data))
+                selectElm(document.querySelector('#clipJson'));
+                copyTextToClipboard(data);
               }}
             >
               クリップボードにコピー ( BOM無し UTF-8 で保存してください )
@@ -643,6 +643,10 @@ function DgexTable() {
     a.click()
     a.remove()
     URL.revokeObjectURL(url)
+  }
+  // 要素を選択する
+  function selectElm ( e ) {
+    e.current.select()
   }
   const defaultSorted = [{
     dataField: 'order',
