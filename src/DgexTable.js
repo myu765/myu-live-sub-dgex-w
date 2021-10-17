@@ -603,9 +603,9 @@ function DgexTable() {
             </Button>
           </Typography>
           <div id="modal-modal-description" style={{marginTop: "10px"}}>
-            <pre id="clipJson">
+            <textarea id="clipJson" name="kanso" rows="1" cols="68">
               {JSON.stringify(data)}
-            </pre>
+            </textarea>
           </div>
         </Box>
       </Modal>
@@ -646,15 +646,7 @@ function DgexTable() {
   }
   // 要素を選択する
   function selectElm ( e ) {
-    e.select()
-    const textarea = document.createElement('textarea')
-    textarea.style.position = 'fixed'
-    textarea.style.opacity = 0
-    textarea.value = JSON.parse(data)
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('Copy')
-    document.body.removeChild(textarea)
+    e.current.select()
   }
   const defaultSorted = [{
     dataField: 'order',
