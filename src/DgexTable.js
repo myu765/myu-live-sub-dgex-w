@@ -646,7 +646,15 @@ function DgexTable() {
   }
   // 要素を選択する
   function selectElm ( e ) {
-    e.current.select()
+    e.select()
+    const textarea = document.createElement('textarea')
+    textarea.style.position = 'fixed'
+    textarea.style.opacity = 0
+    textarea.value = JSON.parse(data)
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('Copy')
+    document.body.removeChild(textarea)
   }
   const defaultSorted = [{
     dataField: 'order',
