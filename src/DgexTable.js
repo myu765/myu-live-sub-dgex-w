@@ -1,12 +1,17 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import EditIcon from '@mui/icons-material/Edit';
 import InputIcon from '@mui/icons-material/Input';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import AssignmentTurnedInSharpIcon from '@mui/icons-material/AssignmentTurnedInSharp';
+import AttachmentTwoToneIcon from '@mui/icons-material/AttachmentTwoTone';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components'
@@ -64,6 +69,18 @@ label {
   cursor: pointer;
 }
 `
+// Modal のスタイル
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 700,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 // A + B のステータスゲージを作る(およそ60でMAX)
 function CreateProgress ( a, b ){
   return (
@@ -92,6 +109,7 @@ function CreateProgressHTML ( a, b ){
   ;
 }
 
+// テーブルを再描画
 const RefreshTable = ( table, _data ) => {
   for(let i in _data){
     if( table.rows[0].cells[0].firstChild.data === "配置")
@@ -147,8 +165,6 @@ const RefreshTable = ( table, _data ) => {
       document.body.contains(table.rows[ parseInt(i) + 1 ].cells[16].firstChild)
       ? table.rows[ parseInt(i) + 1 ].cells[16].firstChild.data = _data[i].luc_sum
       : table.rows[ parseInt(i) + 1 ].cells[16].appendChild(document.createTextNode(_data[i].luc_sum))
-      console.log( document.body.contains(table.rows[ parseInt(i) + 1 ].cells[17].firstChild) )
-      console.log( CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a) )
       document.body.contains(table.rows[ parseInt(i) + 1 ].cells[17].firstChild)
       ? table.rows[ parseInt(i) + 1 ].cells[17].innerHTML = CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a)
       : table.rows[ parseInt(i) + 1 ].cells[17].innerHTML = CreateProgressHTML(_data[i].luc_base, _data[i].luc_plus + _data[i].luc_r_a + _data[i].luc_l_a)
@@ -167,7 +183,7 @@ const RefreshTable = ( table, _data ) => {
     }
     else
     {
-
+      // つかれた
     }
   }
 }
@@ -316,21 +332,23 @@ const CalcStatus = () => {
 CalcStatus()
 
 // ローカルストレージに保存
-const UpdateLocalStrage = (data) => {
+const UpdateLocalStrage = (_data) => {
   let json_data = []
-  for(let i in data){
+  for(let i in _data){
     json_data.push({
-      id: data[i].id, order: data[i].order, pos: data[i].pos, race: data[i].race, cls: data[i].cls, name: data[i].name, lv: data[i].lv, hp: data[i].hp,
-      e_r_a: data[i].e_r_a, atk_ra: data[i].atk_ra, e_l_a: data[i].e_l_a, atk_la: data[i].atk_la,
-      str_base: data[i].str_base, str_plus: data[i].str_plus, str_r_a: data[i].str_r_a, str_l_a: data[i].str_l_a,
-      int_base: data[i].int_base, int_plus: data[i].int_plus, int_r_a: data[i].int_r_a, int_l_a: data[i].int_l_a,
-      mys_base: data[i].mys_base, mys_plus: data[i].mys_plus, mys_r_a: data[i].mys_r_a, mys_l_a: data[i].mys_l_a,
-      vit_base: data[i].vit_base, vit_plus: data[i].vit_plus, vit_r_a: data[i].vit_r_a, vit_l_a: data[i].vit_l_a,
-      agi_base: data[i].agi_base, agi_plus: data[i].agi_plus, agi_r_a: data[i].agi_r_a, agi_l_a: data[i].agi_l_a,
-      luc_base: data[i].luc_base, luc_plus: data[i].luc_plus, luc_r_a: data[i].luc_r_a, luc_l_a: data[i].luc_l_a,
+      id: _data[i].id, order: _data[i].order, pos: _data[i].pos, race: _data[i].race, cls: _data[i].cls, name: _data[i].name, lv: _data[i].lv, hp: _data[i].hp,
+      e_r_a: _data[i].e_r_a, atk_ra: _data[i].atk_ra, e_l_a: _data[i].e_l_a, atk_la: _data[i].atk_la,
+      str_base: _data[i].str_base, str_plus: _data[i].str_plus, str_r_a: _data[i].str_r_a, str_l_a: _data[i].str_l_a,
+      int_base: _data[i].int_base, int_plus: _data[i].int_plus, int_r_a: _data[i].int_r_a, int_l_a: _data[i].int_l_a,
+      mys_base: _data[i].mys_base, mys_plus: _data[i].mys_plus, mys_r_a: _data[i].mys_r_a, mys_l_a: _data[i].mys_l_a,
+      vit_base: _data[i].vit_base, vit_plus: _data[i].vit_plus, vit_r_a: _data[i].vit_r_a, vit_l_a: _data[i].vit_l_a,
+      agi_base: _data[i].agi_base, agi_plus: _data[i].agi_plus, agi_r_a: _data[i].agi_r_a, agi_l_a: _data[i].agi_l_a,
+      luc_base: _data[i].luc_base, luc_plus: _data[i].luc_plus, luc_r_a: _data[i].luc_r_a, luc_l_a: _data[i].luc_l_a,
     })
   }
+  localStorage.removeItem('json')
   localStorage.setItem('json', JSON.stringify(json_data))
+  console.log("Save to LocalStrage:" + json_data[2].order)
 }
 UpdateLocalStrage(data)
 
@@ -378,10 +396,10 @@ const columns = [
   { dataField: 'order', text: 'Sort',   headerAlign: 'center', headerStyle: {width: '1px'}, align: 'center', sort: true, hidden:true, },
   { dataField: 'pos',   text: '配置',   headerAlign: 'center', headerStyle: {width: '2px'}, align: 'center', },
   { dataField: 'race',  text: '種族',   headerAlign: 'center', headerStyle: {width: '6px'}, align: 'center', },
-  { dataField: 'cls',   text: 'クラス', headerAlign: 'center', headerStyle: {width: '7px'}, align: 'center', },
+  { dataField: 'cls',   text: 'クラス', headerAlign: 'center', headerStyle: {width: '6px'}, align: 'center', },
   { dataField: 'name',  text: '名前',   headerAlign: 'center', headerStyle: {width: '9px'}, align: 'center', },
   { dataField: 'lv',    text: 'Lv',     headerAlign: 'center', headerStyle: {width: '1px'}, align: 'center', },
-  { dataField: 'hp',    text: 'HP',     headerAlign: 'center', headerStyle: {width: '1px'}, align: 'right', },
+  { dataField: 'hp',    text: 'HP',     headerAlign: 'center', headerStyle: {width: '2px'}, align: 'right', },
   { dataField: 'str_sum', text: 'STR', headerAlign: 'center', headerStyle: {width: '1px'}, align: 'center', editable: false,
     formatter: (cell, row) =>{ return parseInt(row.str_base) + parseInt(row.str_plus) + parseInt(row.str_r_a) + parseInt(row.str_l_a); },
   },
@@ -449,6 +467,26 @@ const columns = [
 ];
 
 function DgexTable() {
+  // 状態を管理する
+  const [val, setVal] = React.useState({
+    modal001: false,
+    snackbar001: false,
+    snackbarTrns: undefined,
+  });
+  //const [transition, setTransition] = React.useState(undefined);
+  const handleOpen = () => setVal({ ...val, modal001: true });
+  const handleClose = () => setVal({ ...val, modal001: false });
+  
+  //  クリップボードに保存する
+  function copyTextToClipboard(text) {
+    navigator.clipboard.writeText(text)
+    .then( () => {
+      console.error('Async: success')
+    }, (err) => {
+      console.error('Async: Could not copy text: ', err)
+    });
+  }
+  // 列表示を一括で切り替える
   const PackageToggle = (onColumnToggle) => {
     // ON -> OFF
     onColumnToggle("hp")
@@ -496,7 +534,6 @@ function DgexTable() {
     onColumnToggle("agi_l_a")
     onColumnToggle("luc_l_a")
   };
-
   const CustomToggleList = ({
     columns,
     onColumnToggle,
@@ -539,6 +576,39 @@ function DgexTable() {
       >
         { <SaveAltIcon />}
       </button>
+      <button
+        type="button" id="viewjson"
+        style={{marginTop: "0px", marginBottom: "4px", padding: 0, border: 0, width: "100%"}}
+        onClick={handleOpen}
+      >
+        { <AttachmentTwoToneIcon />}
+      </button>
+      <Modal
+        open={val.modal001}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h6">
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<AssignmentTurnedInSharpIcon color="primary" />}
+              onClick={ () => { 
+                copyTextToClipboard(JSON.stringify(data))
+              }}
+            >
+              クリップボードにコピー ( BOM無し UTF-8 で保存してください )
+            </Button>
+          </Typography>
+          <div id="modal-modal-description" style={{marginTop: "10px"}}>
+            <pre id="clipJson">
+              {JSON.stringify(data)}
+            </pre>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
   // ファイルを読み込む
@@ -549,9 +619,9 @@ function DgexTable() {
     reader.onload = () => {
       // テキストからデータに変換してdataとローカルストレージを置き換える
       fileload_data = JSON.parse(reader.result)
+      data = {}
       data = { ...fileload_data }
       CalcStatus()
-      console.log(JSON.stringify(data))
       UpdateLocalStrage(data)
       // テーブルを書き換える
       const table = document.getElementById('mainBootstrapTable')
@@ -563,7 +633,7 @@ function DgexTable() {
     e.addEventListener('click', SaveButton(e) )
     e.removeEventListener('click', SaveButton)
   }
-  function SaveButton(e){
+  function SaveButton (e) {
     const blob = new Blob([JSON.stringify(data)], {type: 'text/plain'})
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
@@ -573,13 +643,11 @@ function DgexTable() {
     a.click()
     a.remove()
     URL.revokeObjectURL(url)
-  }  
-  
+  }
   const defaultSorted = [{
     dataField: 'order',
     order: 'asc'
-  }];
-  
+  }]
   return (
     <ToolkitProvider
       keyField="id"
