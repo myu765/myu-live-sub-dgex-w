@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/myu-live-sub-dgex-w/static/css/main.afd7172b.chunk.css",
-    "main.js": "/myu-live-sub-dgex-w/static/js/main.ada2f6b7.chunk.js",
-    "main.js.map": "/myu-live-sub-dgex-w/static/js/main.ada2f6b7.chunk.js.map",
-    "runtime-main.js": "/myu-live-sub-dgex-w/static/js/runtime-main.b8c3e55b.js",
-    "runtime-main.js.map": "/myu-live-sub-dgex-w/static/js/runtime-main.b8c3e55b.js.map",
+    "main.js": "/myu-live-sub-dgex-w/static/js/main.9843427a.chunk.js",
+    "main.js.map": "/myu-live-sub-dgex-w/static/js/main.9843427a.chunk.js.map",
+    "runtime-main.js": "/myu-live-sub-dgex-w/static/js/runtime-main.c822b202.js",
+    "runtime-main.js.map": "/myu-live-sub-dgex-w/static/js/runtime-main.c822b202.js.map",
     "static/css/2.ab1de19e.chunk.css": "/myu-live-sub-dgex-w/static/css/2.ab1de19e.chunk.css",
-    "static/js/2.f5e09c11.chunk.js": "/myu-live-sub-dgex-w/static/js/2.f5e09c11.chunk.js",
-    "static/js/2.f5e09c11.chunk.js.map": "/myu-live-sub-dgex-w/static/js/2.f5e09c11.chunk.js.map",
-    "static/js/3.d1eec813.chunk.js": "/myu-live-sub-dgex-w/static/js/3.d1eec813.chunk.js",
-    "static/js/3.d1eec813.chunk.js.map": "/myu-live-sub-dgex-w/static/js/3.d1eec813.chunk.js.map",
+    "static/js/2.242d93e2.chunk.js": "/myu-live-sub-dgex-w/static/js/2.242d93e2.chunk.js",
+    "static/js/2.242d93e2.chunk.js.map": "/myu-live-sub-dgex-w/static/js/2.242d93e2.chunk.js.map",
+    "static/js/3.ce09ec5c.chunk.js": "/myu-live-sub-dgex-w/static/js/3.ce09ec5c.chunk.js",
+    "static/js/3.ce09ec5c.chunk.js.map": "/myu-live-sub-dgex-w/static/js/3.ce09ec5c.chunk.js.map",
     "index.html": "/myu-live-sub-dgex-w/index.html",
     "static/css/2.ab1de19e.chunk.css.map": "/myu-live-sub-dgex-w/static/css/2.ab1de19e.chunk.css.map",
     "static/css/main.afd7172b.chunk.css.map": "/myu-live-sub-dgex-w/static/css/main.afd7172b.chunk.css.map",
-    "static/js/2.f5e09c11.chunk.js.LICENSE.txt": "/myu-live-sub-dgex-w/static/js/2.f5e09c11.chunk.js.LICENSE.txt"
+    "static/js/2.242d93e2.chunk.js.LICENSE.txt": "/myu-live-sub-dgex-w/static/js/2.242d93e2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b8c3e55b.js",
+    "static/js/runtime-main.c822b202.js",
     "static/css/2.ab1de19e.chunk.css",
-    "static/js/2.f5e09c11.chunk.js",
+    "static/js/2.242d93e2.chunk.js",
     "static/css/main.afd7172b.chunk.css",
-    "static/js/main.ada2f6b7.chunk.js"
+    "static/js/main.9843427a.chunk.js"
   ]
 }
