@@ -190,7 +190,7 @@ const RefreshTable = ( table, _data ) => {
 
 const default_data = [
   {
-    id: 1, order:1, pos:"前衛", race:"ヒューマン", cls:"ゲイザー", name: "オズ", lv:37, hp:937,
+    id: 1, order:"01", pos:"前衛", race:"ヒューマン", cls:"ゲイザー", name: "オズ", lv:37, hp:937,
     str_base: 21, int_base: 9, mys_base: 9, vit_base: 20, agi_base: 9, luc_base:22,
     str_plus: 7, int_plus: 0, mys_plus: 0, vit_plus: 5, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -199,7 +199,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"守護天使の書", atk_la:0,
   },
   {
-    id: 2, order:2, pos:"前衛", race:"マキナ", cls:"マキナ", name: "クリスとクレア", lv:37, hp:928,
+    id: 2, order:"12", pos:"前衛", race:"マキナ", cls:"マキナ", name: "クリスとクレア", lv:37, hp:928,
     str_base: 5, int_base: 5, mys_base: 5, vit_base: 20, agi_base: 20, luc_base:32,
     str_plus: 0, int_plus: 0, mys_plus: 3, vit_plus: 6, agi_plus: 6, luc_plus:9,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -208,7 +208,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 3, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"闇天使のメイス＋６", atk_la:271,
   },
   {
-    id: 3, order:10, pos:"後衛", race:"ヒューマン", cls:"ヒーラー", name: "セリナ", lv:38, hp:918,
+    id: 3, order:"30", pos:"後衛", race:"ヒューマン", cls:"ヒーラー", name: "セリナ", lv:38, hp:918,
     str_base: 9, int_base: 9, mys_base: 27, vit_base: 20, agi_base: 9, luc_base:17,
     str_plus: 0, int_plus: 0, mys_plus: 21, vit_plus: 0, agi_plus: 0, luc_plus:1,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -217,7 +217,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 2, mys_l_a: 2, vit_l_a: 0, agi_l_a: 2, luc_l_a:2, e_l_a:"イーシルの御鏡", atk_la:0,
   },
   {
-    id: 4, order:11, pos:"", race:"", cls:"", name: "", lv:0, hp:0,
+    id: 4, order:"51", pos:"", race:"", cls:"", name: "", lv:0, hp:0,
     str_base: 0, int_base: 0, mys_base: 0, vit_base: 0, agi_base: 0, luc_base:0,
     str_plus: 0, int_plus: 0, mys_plus: 0, vit_plus: 0, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -226,7 +226,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"", atk_la:0,
   },
   {
-    id: 5, order:12, pos:"", race:"", cls:"", name: "", lv:0, hp:0,
+    id: 5, order:"52", pos:"", race:"", cls:"", name: "", lv:0, hp:0,
     str_base: 0, int_base: 0, mys_base: 0, vit_base: 0, agi_base: 0, luc_base:0,
     str_plus: 0, int_plus: 0, mys_plus: 0, vit_plus: 0, agi_plus: 0, luc_plus:0, 
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -235,7 +235,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"", atk_la:0,
   },
   {
-    id: 6, order:21, pos:"", race:"", cls:"", name: "", lv:0, hp:0,
+    id: 6, order:"70", pos:"", race:"", cls:"", name: "", lv:0, hp:0,
     str_base: 0, int_base: 0, mys_base: 0, vit_base: 0, agi_base: 0, luc_base:0,
     str_plus: 0, int_plus: 0, mys_plus: 0, vit_plus: 0, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -244,7 +244,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"", atk_la:0,
   },
   {
-    id: 7, order:22, pos:"", race:"", cls:"", name: "", lv:0, hp:0,
+    id: 7, order:"80", pos:"", race:"", cls:"", name: "", lv:0, hp:0,
     str_base: 0, int_base: 0, mys_base: 0, vit_base: 0, agi_base: 0, luc_base:0,
     str_plus: 0, int_plus: 0, mys_plus: 0, vit_plus: 0, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -253,7 +253,7 @@ const default_data = [
     str_l_a: 0, int_l_a: 0, mys_l_a: 0, vit_l_a: 0, agi_l_a: 0, luc_l_a:0, e_l_a:"", atk_la:0,
   },
   {
-    id: 8, order:23, pos:"", race:"", cls:"", name: "", lv:0, hp:0,
+    id: 8, order:"90", pos:"", race:"", cls:"", name: "", lv:0, hp:0,
     str_base: 0, int_base: 0, mys_base: 0, vit_base: 0, agi_base: 0, luc_base:0,
     str_plus: 0, int_plus: 0, mys_plus: 0, vit_plus: 0, agi_plus: 0, luc_plus:0,
     str_bar: "", int_bar: "", mys_bar: "", vit_bar: "", agi_bar: "", luc_bar:"",
@@ -589,18 +589,9 @@ function DgexTable() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h6">
-            <Button
-              variant="outlined"
-              size="small"
-              startIcon={<AssignmentTurnedInSharpIcon color="primary" />}
-              onClick={ () => { 
-                selectElm(document.querySelector('#clipJson'));
-                copyTextToClipboard(data);
-              }}
-            >
-              クリップボードにコピー ( BOM無し UTF-8 で保存してください )
-            </Button>
+          <Typography id="modal-modal-title" variant="div" component="body1">
+              {<AssignmentTurnedInSharpIcon color="primary" />}
+              SAVE : 下記のテキストを BOM無し UTF-8 で保存してください
           </Typography>
           <div id="modal-modal-description" style={{marginTop: "10px"}}>
             <textarea id="clipJson" name="kanso" rows="1" cols="68">
